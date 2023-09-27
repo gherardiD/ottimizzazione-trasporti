@@ -38,8 +38,9 @@ namespace logistica
                 //rows
                 for (int r = 0; r < 3; r++)
                 {
-                    this.table_default.Rows.Add("pcd" + r, 30 + r*10, 10 + r * 10, 20 + r * 10, 500);
+                    this.table_default.Rows.Add("pcd" + r, 30 + r*10, 10 + r * 10, 20 + r * 10, 50*(r+1));
                 }
+                this.table_default.Rows.Add("tot" , 100, 120, 80, 300);
             }
             else
             {

@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.consumatori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_label = new System.Windows.Forms.Label();
@@ -128,12 +129,20 @@
             this.panel_table.Controls.Add(this.table_default);
             this.panel_table.Location = new System.Drawing.Point(12, 103);
             this.panel_table.Name = "panel_table";
-            this.panel_table.Size = new System.Drawing.Size(576, 174);
+            this.panel_table.Size = new System.Drawing.Size(1108, 498);
             this.panel_table.TabIndex = 6;
             // 
             // table_default
             // 
             this.table_default.CausesValidation = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table_default.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.table_default.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table_default.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productor,
@@ -145,7 +154,7 @@
             this.table_default.Location = new System.Drawing.Point(0, 0);
             this.table_default.Name = "table_default";
             this.table_default.RowHeadersWidth = 70;
-            this.table_default.Size = new System.Drawing.Size(576, 174);
+            this.table_default.Size = new System.Drawing.Size(1108, 498);
             this.table_default.TabIndex = 6;
             this.table_default.Visible = false;
             // 
@@ -154,34 +163,39 @@
             this.productor.HeaderText = "productor";
             this.productor.Name = "productor";
             this.productor.ReadOnly = true;
+            this.productor.Width = 150;
             // 
             // price_0
             // 
             this.price_0.HeaderText = "price";
             this.price_0.Name = "price_0";
+            this.price_0.Width = 150;
             // 
             // price_1
             // 
             this.price_1.HeaderText = "price";
             this.price_1.Name = "price_1";
+            this.price_1.Width = 150;
             // 
             // price_2
             // 
             this.price_2.HeaderText = "price";
             this.price_2.Name = "price_2";
+            this.price_2.Width = 150;
             // 
             // tot_producted
             // 
             this.tot_producted.HeaderText = "tot";
             this.tot_producted.Name = "tot_producted";
             this.tot_producted.ReadOnly = true;
+            this.tot_producted.Width = 150;
             // 
             // logistica_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(1132, 690);
             this.Controls.Add(this.panel_table);
             this.Controls.Add(this.genera_btn);
             this.Controls.Add(this.consumatori_label);
