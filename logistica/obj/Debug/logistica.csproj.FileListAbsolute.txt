@@ -9,3 +9,13 @@ C:\Users\gherardi.19032\source\repos\logistica\logistica\obj\Debug\logistica.csp
 C:\Users\gherardi.19032\source\repos\logistica\logistica\obj\Debug\logistica.csproj.CoreCompileInputs.cache
 C:\Users\gherardi.19032\source\repos\logistica\logistica\obj\Debug\logistica.exe
 C:\Users\gherardi.19032\source\repos\logistica\logistica\obj\Debug\logistica.pdb
+C:\Users\danig\Source\Repos\logistica\logistica\bin\Debug\logistica.exe.config
+C:\Users\danig\Source\Repos\logistica\logistica\bin\Debug\logistica.exe
+C:\Users\danig\Source\Repos\logistica\logistica\bin\Debug\logistica.pdb
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.AssemblyReference.cache
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.logistica_form.resources
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.Properties.Resources.resources
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.GenerateResource.cache
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.CoreCompileInputs.cache
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.exe
+C:\Users\danig\Source\Repos\logistica\logistica\obj\Debug\logistica.pdb
