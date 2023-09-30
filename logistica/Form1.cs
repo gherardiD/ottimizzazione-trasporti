@@ -12,7 +12,7 @@ namespace logistica
 {
     public partial class logistica_form : Form
     {
-        DataGridView table;
+        //DataGridView table;
         int prezzo_tot;
         public logistica_form()
         {
@@ -36,33 +36,45 @@ namespace logistica
         private void genera_btn_Click(object sender, EventArgs e)
         {
             //generate the table
+            this.table.Visible = true;
             if (!check())
             {
-                this.table_default.Visible = true;
+                //default table
+
+                //columns
+                for (int c = 0; c < 3; c++)
+                {
+                    this.table.Columns.Add("price_" + c, "Price");
+                }
+                this.table.Columns.Add("tot_produced", "Tot produced");
                 //rows
                 for (int r = 0; r < 3; r++)
                 {
-                    this.table_default.Rows.Add("pcd" + r, 30 + r*10, 10 + r * 10, 20 + r * 10, 50*(r+1));
+                    this.table.Rows.Add("pcd" + r, 30 + r*10, 10 + r * 10, 20 + r * 10, 50*(r+1));
                 }
-                this.table_default.Rows.Add("tot" , 100, 120, 80, 300);
+                this.table.Rows.Add("tot" , 100, 120, 80, 300);
             }
             else
             {
+                //user table
                 int numero_produttori = (int)produttori_num.Value;
                 int numero_consumatori = (int)consumatori_num.Value;
+
                 //creation table
-                this.table = new DataGridView();
-                this.table.Name= "table";
-                this.table.Dock = DockStyle.Fill;
-                panel_table.Controls.Add(this.table);
-                this.table.ColumnHeadersVisible = true;
+                //this.table = new DataGridView();
+                //this.table.Name= "table";
+                //this.table.Dock = DockStyle.Fill;
+                //panel_table.Controls.Add(this.table);
+                //this.table.ColumnHeadersVisible = true;
+
                 //columns
-                this.table.Columns.Add("productor", "Productors");
+                ///this.table.Columns.Add("productor", "Productors");
                 for (int c = 0; c < numero_consumatori; c++)
                 {
                     this.table.Columns.Add("price_" + c, "Price");
                 }
-                this.table.Columns.Add("tot_producted", "tot");
+                this.table.Columns.Add("tot_produced", "Tot produced");
+
                 //rows
                 for(int r = 0; r < numero_produttori; r++)
                 {
@@ -89,51 +101,35 @@ namespace logistica
                 for (int c = 1; c < colonne-1; c++)
                 {
                     int valore_cella = int.Parse(this.table.Rows[r].Cells[c].Value.ToString());
-                    int totale_prodotto = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
-                    int tot_request = int.Parse(this.table.Rows[righe - 2].Cells[c].Value.ToString());
-                    MessageBox.Show(valore_cella + "");
-                    MessageBox.Show(totale_prodotto + "");
-                    MessageBox.Show(tot_request + "");
+                    int total_produced = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
+                    int total_requested = int.Parse(this.table.Rows[righe - 2].Cells[c].Value.ToString());
 
-
-                    if (totale_prodotto - tot_request > 0)
+                    if (total_produced - total_requested > 0)
                     {
-                        this.prezzo_tot += tot_request * valore_cella;
-                        totale_prodotto -= tot_request;
-                        tot_request = 0;
+                        //delete requester
+                        this.prezzo_tot += total_requested * valore_cella;
+                        total_produced -= total_requested;
+                        this.table.Rows[r].Cells["tot_produced"].Value = total_produced;
+                        total_requested = 0;
                         this.table.Columns.RemoveAt(c);
                         colonne -= 1;
+                        c--;
                     }
                     else
                     {
-                        this.prezzo_tot += totale_prodotto * valore_cella;
-                        tot_request -= totale_prodotto;
-                        totale_prodotto = 0;
+                        //delete producer
+                        this.prezzo_tot += total_produced * valore_cella;
+                        total_requested -= total_produced;
+                        this.table.Rows[righe - 2].Cells[c].Value = total_requested;
+                        total_produced = 0;
                         this.table.Rows.RemoveAt(r);
                         righe -= 1;
+                        r--;
                         break;
                     }
                 }
             }
-            ///MessageBox.Show(this.prezzo_tot + "");
-            ///MessageBox.Show(this.table.Rows[righe - 2].Cells[colonne - 2].Value.ToString());
-            /*
-            foreach (DataGridViewRow row in this.table.Rows)
-            {
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    //do operations with cell
-                    MessageBox.Show(cell.Value + "");
-                }
-            }
-            */
-            /*for (int r = 0; r < righe - 2; r++)
-            {
-                for (int c = 1; c < colonne - 1; c++)
-                {
-                    ///MessageBox.Show(this.table.Rows[r].Cells[c].Value.ToString());
-                }
-            }*/
+            MessageBox.Show(this.prezzo_tot + "");
         }
     }
 }

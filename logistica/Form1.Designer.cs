@@ -27,24 +27,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.consumatori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_label = new System.Windows.Forms.Label();
             this.consumatori_label = new System.Windows.Forms.Label();
             this.genera_btn = new System.Windows.Forms.Button();
             this.panel_table = new System.Windows.Forms.Panel();
-            this.table_default = new System.Windows.Forms.DataGridView();
-            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price_0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tot_producted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table = new System.Windows.Forms.DataGridView();
             this.start_btn = new System.Windows.Forms.Button();
+            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.consumatori_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produttori_num)).BeginInit();
             this.panel_table.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.table_default)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.SuspendLayout();
             // 
             // consumatori_num
@@ -124,76 +120,35 @@
             // 
             this.panel_table.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel_table.Controls.Add(this.table_default);
+            this.panel_table.Controls.Add(this.table);
             this.panel_table.Location = new System.Drawing.Point(16, 127);
             this.panel_table.Margin = new System.Windows.Forms.Padding(4);
             this.panel_table.Name = "panel_table";
             this.panel_table.Size = new System.Drawing.Size(1100, 515);
             this.panel_table.TabIndex = 6;
             // 
-            // table_default
+            // table
             // 
-            this.table_default.CausesValidation = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table_default.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.table_default.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.table_default.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.productor,
-            this.price_0,
-            this.price_1,
-            this.price_2,
-            this.tot_producted});
-            this.table_default.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table_default.Location = new System.Drawing.Point(0, 0);
-            this.table_default.Margin = new System.Windows.Forms.Padding(4);
-            this.table_default.Name = "table_default";
-            this.table_default.RowHeadersWidth = 70;
-            this.table_default.Size = new System.Drawing.Size(1100, 515);
-            this.table_default.TabIndex = 6;
-            this.table_default.Visible = false;
-            // 
-            // productor
-            // 
-            this.productor.HeaderText = "productor";
-            this.productor.MinimumWidth = 6;
-            this.productor.Name = "productor";
-            this.productor.ReadOnly = true;
-            this.productor.Width = 150;
-            // 
-            // price_0
-            // 
-            this.price_0.HeaderText = "price";
-            this.price_0.MinimumWidth = 6;
-            this.price_0.Name = "price_0";
-            this.price_0.Width = 150;
-            // 
-            // price_1
-            // 
-            this.price_1.HeaderText = "price";
-            this.price_1.MinimumWidth = 6;
-            this.price_1.Name = "price_1";
-            this.price_1.Width = 150;
-            // 
-            // price_2
-            // 
-            this.price_2.HeaderText = "price";
-            this.price_2.MinimumWidth = 6;
-            this.price_2.Name = "price_2";
-            this.price_2.Width = 150;
-            // 
-            // tot_producted
-            // 
-            this.tot_producted.HeaderText = "tot producted";
-            this.tot_producted.MinimumWidth = 6;
-            this.tot_producted.Name = "tot_producted";
-            this.tot_producted.ReadOnly = true;
-            this.tot_producted.Width = 150;
+            this.table.CausesValidation = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productor});
+            this.table.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table.Location = new System.Drawing.Point(0, 0);
+            this.table.Margin = new System.Windows.Forms.Padding(4);
+            this.table.Name = "table";
+            this.table.RowHeadersWidth = 70;
+            this.table.Size = new System.Drawing.Size(1100, 515);
+            this.table.TabIndex = 6;
+            this.table.Visible = false;
             // 
             // start_btn
             // 
@@ -209,6 +164,14 @@
             this.start_btn.Text = "Start";
             this.start_btn.UseVisualStyleBackColor = false;
             this.start_btn.Click += new System.EventHandler(this.start_btn_Click);
+            // 
+            // productor
+            // 
+            this.productor.HeaderText = "Productors";
+            this.productor.MinimumWidth = 6;
+            this.productor.Name = "productor";
+            this.productor.ReadOnly = true;
+            this.productor.Width = 150;
             // 
             // logistica_form
             // 
@@ -231,7 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.consumatori_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.produttori_num)).EndInit();
             this.panel_table.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.table_default)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,13 +208,9 @@
         private System.Windows.Forms.Label consumatori_label;
         private System.Windows.Forms.Button genera_btn;
         private System.Windows.Forms.Panel panel_table;
-        private System.Windows.Forms.DataGridView table_default;
+        private System.Windows.Forms.DataGridView table;
         private System.Windows.Forms.Button start_btn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price_0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price_1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price_2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tot_producted;
     }
 }
 
