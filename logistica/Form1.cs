@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,8 +46,11 @@ namespace logistica
                 for (int c = 0; c < 3; c++)
                 {
                     this.table.Columns.Add("price_" + c, "Price");
+                    this.table.Columns["price_" + c].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
                 this.table.Columns.Add("tot_produced", "Tot produced");
+                this.table.Columns["tot_produced"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
                 //rows
                 for (int r = 0; r < 3; r++)
                 {
@@ -82,6 +86,7 @@ namespace logistica
                 }
                 this.table.Rows.Add("tot", 0, 0, 0, 0);
             }
+            this.genera_btn.Enabled = false;
         }
 
 
@@ -94,15 +99,15 @@ namespace logistica
         {
             int colonne = this.table.Columns.Count;
             int righe = this.table.Rows.Count;
-            
-
-            for (int r = 0; r < righe - 2; r++)
+            this.panel_text.Visible= true;
+            /*
+            for (int r = 0; r < righe - 1; r++)
             {   
                 for (int c = 1; c < colonne-1; c++)
                 {
                     int valore_cella = int.Parse(this.table.Rows[r].Cells[c].Value.ToString());
                     int total_produced = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
-                    int total_requested = int.Parse(this.table.Rows[righe - 2].Cells[c].Value.ToString());
+                    int total_requested = int.Parse(this.table.Rows[righe - 1].Cells[c].Value.ToString());
 
                     if (total_produced - total_requested > 0)
                     {
@@ -120,16 +125,26 @@ namespace logistica
                         //delete producer
                         this.prezzo_tot += total_produced * valore_cella;
                         total_requested -= total_produced;
-                        this.table.Rows[righe - 2].Cells[c].Value = total_requested;
+                        this.table.Rows[righe - 1].Cells[c].Value = total_requested;
                         total_produced = 0;
                         this.table.Rows.RemoveAt(r);
                         righe -= 1;
                         r--;
                         break;
                     }
+                    this.table.Refresh();
+                    Thread.Sleep(1000);
                 }
+                this.table.Refresh();
+                Thread.Sleep(1000);
             }
             MessageBox.Show(this.prezzo_tot + "");
+            */
+
+            int Max = 10000000;
+            int[,] posizione_minimi= new int[(colonne - 2) * ( righe - 2), 2];
+            MessageBox.Show((colonne - 2) * (righe - 1) + "");
+
         }
     }
 }
