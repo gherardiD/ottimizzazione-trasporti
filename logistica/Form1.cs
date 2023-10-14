@@ -137,7 +137,7 @@ namespace logistica
                     
                     // put random prices
                     this.table.Rows[r].Cells[c].Value = casual_number_cell;
-                    casual_number_cell = rnd.Next(100);
+                    casual_number_cell = rnd.Next(1, 100);
             
                     if(c == colonne - 2)
                     {
@@ -177,8 +177,8 @@ namespace logistica
             this.panel_text.Refresh();
             this.text.Refresh();
 
-            nord_ovest(righe , colonne);
-            // minimi_costi(righe , colonne);
+            // nord_ovest(righe , colonne);
+            minimi_costi(righe , colonne);
         }
 
         private void nord_ovest(int righe, int colonne)
@@ -280,7 +280,7 @@ namespace logistica
                     if ( valore_cella < Max)
                     {
                         Max = valore_cella;
-                        MessageBox.Show(Max + "");
+                        // MessageBox.Show(Max + "");
                         min_data[0] = r;
                         min_data[1] = c;
                         min_data[2] = valore_cella;
