@@ -27,7 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.consumatori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_label = new System.Windows.Forms.Label();
@@ -35,10 +36,12 @@
             this.genera_btn = new System.Windows.Forms.Button();
             this.panel_table = new System.Windows.Forms.Panel();
             this.table = new System.Windows.Forms.DataGridView();
-            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_btn = new System.Windows.Forms.Button();
             this.panel_text = new System.Windows.Forms.Panel();
             this.text = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genera_numeri_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.consumatori_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produttori_num)).BeginInit();
             this.panel_table.SuspendLayout();
@@ -136,14 +139,14 @@
             this.table.AllowUserToAddRows = false;
             this.table.AllowUserToDeleteRows = false;
             this.table.CausesValidation = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productor});
@@ -154,14 +157,6 @@
             this.table.Size = new System.Drawing.Size(825, 571);
             this.table.TabIndex = 6;
             this.table.Visible = false;
-            // 
-            // productor
-            // 
-            this.productor.HeaderText = "Productors";
-            this.productor.MinimumWidth = 6;
-            this.productor.Name = "productor";
-            this.productor.ReadOnly = true;
-            this.productor.Width = 150;
             // 
             // start_btn
             // 
@@ -201,12 +196,40 @@
             this.text.TabIndex = 9;
             this.text.Text = "NORD-OVEST SYSTEM:";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // productor
+            // 
+            this.productor.HeaderText = "Productors";
+            this.productor.MinimumWidth = 6;
+            this.productor.Name = "productor";
+            this.productor.ReadOnly = true;
+            // 
+            // genera_numeri_btn
+            // 
+            this.genera_numeri_btn.AutoSize = true;
+            this.genera_numeri_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.genera_numeri_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.genera_numeri_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genera_numeri_btn.Location = new System.Drawing.Point(426, 24);
+            this.genera_numeri_btn.Margin = new System.Windows.Forms.Padding(2);
+            this.genera_numeri_btn.Name = "genera_numeri_btn";
+            this.genera_numeri_btn.Size = new System.Drawing.Size(102, 39);
+            this.genera_numeri_btn.TabIndex = 11;
+            this.genera_numeri_btn.Text = "Genera numeri";
+            this.genera_numeri_btn.UseVisualStyleBackColor = false;
+            this.genera_numeri_btn.Click += new System.EventHandler(this.genera_numeri_btn_Click);
+            // 
             // logistica_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1466, 829);
+            this.Controls.Add(this.genera_numeri_btn);
             this.Controls.Add(this.panel_text);
             this.Controls.Add(this.start_btn);
             this.Controls.Add(this.panel_table);
@@ -244,9 +267,11 @@
         private System.Windows.Forms.Panel panel_table;
         private System.Windows.Forms.DataGridView table;
         private System.Windows.Forms.Button start_btn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productor;
         private System.Windows.Forms.Panel panel_text;
         private System.Windows.Forms.TextBox text;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productor;
+        private System.Windows.Forms.Button genera_numeri_btn;
     }
 }
 

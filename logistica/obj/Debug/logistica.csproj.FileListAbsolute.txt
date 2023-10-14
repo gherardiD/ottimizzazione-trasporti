@@ -12,7 +12,6 @@ C:\Users\gherardi.19032\Source\Repos\logistica\logistica\bin\Debug\logistica.exe
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\bin\Debug\logistica.exe
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\bin\Debug\logistica.pdb
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.AssemblyReference.cache
-C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.SuggestedBindingRedirects.cache
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.logistica_form.resources
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.Properties.Resources.resources
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.GenerateResource.cache

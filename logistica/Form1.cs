@@ -63,6 +63,7 @@ namespace logistica
                 //user table
                 int numero_produttori = (int)produttori_num.Value;
                 int numero_consumatori = (int)consumatori_num.Value;
+                
 
                 //creation table
                 //this.table = new DataGridView();
@@ -77,23 +78,95 @@ namespace logistica
                 for (int c = 0; c < numero_consumatori; c++)
                 {
                     this.table.Columns.Add("price_" + c, "Price");
+                    if (numero_consumatori >= 6)
+                    {
+                        this.table.Columns["price_" + c].Width = 50;
+                    }else if(numero_consumatori > 3 && numero_consumatori < 6)
+                    {
+                        this.table.Columns["price_" + c].Width = 80;
+                    }
                 }
                 this.table.Columns.Add("tot_produced", "Tot produced");
 
                 // rows
                 for(int r = 0; r < numero_produttori; r++)
                 {
-                    this.table.Rows.Add("pcd" + r, 0, 0, 0, 0);
+                    this.table.Rows.Add("pcd" + r);
                 }
-                this.table.Rows.Add("tot", 0, 0, 0, 0);
+                this.table.Rows.Add("tot");
             }
             this.genera_btn.Enabled = false;
         }
 
 
-        public void update()
+        private void genera_numeri_btn_Click(object sender, EventArgs e)
         {
-            // to do
+            int colonne = this.table.Columns.Count;
+            int righe = this.table.Rows.Count;
+            Random rnd = new Random();
+
+            // price values max 100
+            int casual_number_cell = rnd.Next(100);
+            int casual_tot_requested = 0;
+            int casual_tot_produced = 0;
+            int max = 0;
+
+            if(righe > 12)
+            {
+                max = 3;
+            }
+            else
+            {
+                max = 2;
+            }
+
+            // tot = total producted = total requested
+            int tot = 0;
+            
+            for (int r = 0; r < righe - 1; r++)
+            {
+                for (int c = 1; c < colonne - 1; c++)
+                {
+                    if(r == 0)
+                    {
+                        // put random numbers in total requested (last line) and calculate tot
+                        casual_tot_requested = rnd.Next(colonne + righe, 300);
+                        this.table.Rows[righe - 1].Cells[c].Value = casual_tot_requested;
+                        tot += casual_tot_requested;
+                    }
+                    
+                    // put random prices
+                    this.table.Rows[r].Cells[c].Value = casual_number_cell;
+                    casual_number_cell = rnd.Next(100);
+            
+                    if(c == colonne - 2)
+                    {
+                        // setting total produced values based to tot
+                        if(r == 0)
+                        {
+                            // set tot value in the last row and last coloumn
+                            this.table.Rows[righe - 1].Cells[colonne - 1].Value = tot;
+                        }
+                        // minimun and maximum to avoid total produced values = 0
+                        /// MessageBox.Show(tot + "");
+                        casual_tot_produced = rnd.Next(1, (tot - (righe - r))/max);
+
+                        if(r == righe - 2)
+                        {
+                            // setting the last total produced to tot (by doing so -> tot = total porduced = total requested)
+                            this.table.Rows[r].Cells[colonne - 1].Value = tot;
+                        }
+                        else
+                        {
+                            this.table.Rows[r].Cells[colonne - 1].Value = casual_tot_produced;
+                        }
+                        // updating tot
+                        tot = tot - casual_tot_produced;
+                    }
+                }
+            }
+            
+            this.table.Refresh();
         }
 
         private void start_btn_Click(object sender, EventArgs e)
@@ -101,6 +174,9 @@ namespace logistica
             int colonne = this.table.Columns.Count;
             int righe = this.table.Rows.Count;
             this.panel_text.Visible= true;
+            this.panel_text.Refresh();
+            this.text.Refresh();
+
             nord_ovest(righe , colonne);
             // minimi_costi(righe , colonne);
         }
@@ -117,16 +193,21 @@ namespace logistica
 
                     if(delete(r, c, valore_cella, total_produced, total_requested, righe) == 'c')
                     {
+                        this.text.AppendText(Environment.NewLine);
+                        this.text.AppendText(" produttore  " + r + " soddisfa consumatore " + c + " al prezzo di " + total_requested * valore_cella);
                         colonne -= 1;
                         c--;
                     }
                     else
                     {
+                        this.text.AppendText(Environment.NewLine);
+                        this.text.AppendText(" consumatore " + c + " è stato soddisfato da " + r + " al prezzo di " + total_produced * valore_cella);
                         righe -= 1;
                         r--;
                         break;
                     }
 
+                    this.text.Refresh();
                     this.table.Refresh();
                     Thread.Sleep(1000);
                 }
@@ -210,5 +291,7 @@ namespace logistica
             }
             return min_data;
         }
+
+        
     }
 }
