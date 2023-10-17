@@ -244,16 +244,22 @@ namespace logistica
 
         private void minimi_costi(int righe, int colonne)
         {
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText("MINIMI-COSTI SYSTEM");
             int[] pos = new int[5];
             while (righe > 1 && colonne >= 3)
             {
                 pos = find_min_data(righe, colonne);
                 if (delete(pos[0], pos[1], pos[2], pos[3], pos[4], righe) == 'c')
                 {
+                    this.text.AppendText(Environment.NewLine);
+                    this.text.AppendText(" produttore  " + pos[0] + " soddisfa consumatore " + pos[1] + " al prezzo di " + pos[2] * pos[4]);
                     colonne -= 1;
                 }
                 else
                 {
+                    this.text.AppendText(Environment.NewLine);
+                    this.text.AppendText(" produttore  " + pos[1] + " soddisfa consumatore " + pos[0] + " al prezzo di " + pos[2] * pos[4]);
                     righe -= 1;
                 }
                 this.table.Refresh();

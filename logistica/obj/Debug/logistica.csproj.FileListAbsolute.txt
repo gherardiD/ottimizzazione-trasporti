@@ -18,3 +18,4 @@ C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csp
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.CoreCompileInputs.cache
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.exe
 C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.pdb
+C:\Users\gherardi.19032\Source\Repos\logistica\logistica\obj\Debug\logistica.csproj.SuggestedBindingRedirects.cache
