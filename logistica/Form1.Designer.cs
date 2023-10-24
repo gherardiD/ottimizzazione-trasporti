@@ -28,7 +28,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.consumatori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_num = new System.Windows.Forms.NumericUpDown();
             this.produttori_label = new System.Windows.Forms.Label();
@@ -36,17 +37,20 @@
             this.genera_btn = new System.Windows.Forms.Button();
             this.panel_table = new System.Windows.Forms.Panel();
             this.table = new System.Windows.Forms.DataGridView();
+            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_btn = new System.Windows.Forms.Button();
             this.panel_text = new System.Windows.Forms.Panel();
             this.text = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.productor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.genera_numeri_btn = new System.Windows.Forms.Button();
+            this.table_copy = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.consumatori_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produttori_num)).BeginInit();
             this.panel_table.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.panel_text.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.table_copy)).BeginInit();
             this.SuspendLayout();
             // 
             // consumatori_num
@@ -139,14 +143,14 @@
             this.table.AllowUserToAddRows = false;
             this.table.AllowUserToDeleteRows = false;
             this.table.CausesValidation = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productor});
@@ -157,6 +161,13 @@
             this.table.Size = new System.Drawing.Size(825, 571);
             this.table.TabIndex = 6;
             this.table.Visible = false;
+            // 
+            // productor
+            // 
+            this.productor.HeaderText = "Productors";
+            this.productor.MinimumWidth = 6;
+            this.productor.Name = "productor";
+            this.productor.ReadOnly = true;
             // 
             // start_btn
             // 
@@ -177,6 +188,7 @@
             // 
             this.panel_text.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_text.Controls.Add(this.table_copy);
             this.panel_text.Controls.Add(this.text);
             this.panel_text.Location = new System.Drawing.Point(883, 103);
             this.panel_text.Name = "panel_text";
@@ -201,13 +213,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // productor
-            // 
-            this.productor.HeaderText = "Productors";
-            this.productor.MinimumWidth = 6;
-            this.productor.Name = "productor";
-            this.productor.ReadOnly = true;
-            // 
             // genera_numeri_btn
             // 
             this.genera_numeri_btn.AutoSize = true;
@@ -222,6 +227,36 @@
             this.genera_numeri_btn.Text = "Genera numeri";
             this.genera_numeri_btn.UseVisualStyleBackColor = false;
             this.genera_numeri_btn.Click += new System.EventHandler(this.genera_numeri_btn_Click);
+            // 
+            // table_copy
+            // 
+            this.table_copy.AllowUserToAddRows = false;
+            this.table_copy.AllowUserToDeleteRows = false;
+            this.table_copy.CausesValidation = false;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table_copy.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.table_copy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.table_copy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.table_copy.Location = new System.Drawing.Point(20, 47);
+            this.table_copy.Name = "table_copy";
+            this.table_copy.RowHeadersWidth = 70;
+            this.table_copy.Size = new System.Drawing.Size(465, 222);
+            this.table_copy.TabIndex = 12;
+            this.table_copy.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Productors";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // logistica_form
             // 
@@ -252,6 +287,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.table)).EndInit();
             this.panel_text.ResumeLayout(false);
             this.panel_text.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.table_copy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,6 +308,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn productor;
         private System.Windows.Forms.Button genera_numeri_btn;
+        private System.Windows.Forms.DataGridView table_copy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }
 

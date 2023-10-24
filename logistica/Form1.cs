@@ -15,10 +15,12 @@ namespace logistica
     {
         //DataGridView table;
         int prezzo_tot;
+        //DataGridView table_copy;
         public logistica_form()
         {
             InitializeComponent();
             this.prezzo_tot = 0;
+          //  table_copy= new DataGridView();
         }
 
         public bool check()
@@ -63,16 +65,17 @@ namespace logistica
                 //user table
                 int numero_produttori = (int)produttori_num.Value;
                 int numero_consumatori = (int)consumatori_num.Value;
-                
+
 
                 //creation table
                 //this.table = new DataGridView();
                 //this.table.Name= "table";
                 //this.table.Dock = DockStyle.Fill;
                 //panel_table.Controls.Add(this.table);
+                //panel_table.Controls.Remove(this.table);
                 //this.table.ColumnHeadersVisible = true;
                 ///this.table.Columns.Add("productor", "Productors");
-                
+
 
                 // columns
                 for (int c = 0; c < numero_consumatori; c++)
@@ -165,8 +168,27 @@ namespace logistica
                     }
                 }
             }
-            
+
             this.table.Refresh();
+        }
+
+        private void CloneDataGrid(DataGridView sorgente, DataGridView destinatario)
+        {
+
+            destinatario.ColumnCount = sorgente.ColumnCount;
+            destinatario.RowCount = sorgente.RowCount;
+            for (int riga = 0; riga < sorgente.RowCount; riga++)
+                for (int colonna = 0; colonna < sorgente.ColumnCount; colonna++)
+                    destinatario.Rows[riga].Cells[colonna].Value = sorgente.Rows[riga].Cells[colonna].Value;
+            for (int colonna = 0; colonna < sorgente.ColumnCount; colonna++)
+            {
+                destinatario.Columns[colonna].HeaderText=sorgente.Columns[colonna].HeaderText;
+                destinatario.Columns[colonna].Name = sorgente.Columns[colonna].Name;
+                destinatario.Columns[colonna].Width = sorgente.Columns[colonna].Width;
+                destinatario.Columns[colonna].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            destinatario.Refresh();
+            return;
         }
 
         private void start_btn_Click(object sender, EventArgs e)
@@ -177,11 +199,22 @@ namespace logistica
             this.panel_text.Refresh();
             this.text.Refresh();
 
-            // nord_ovest(righe , colonne);
-            minimi_costi(righe , colonne);
+            // copy the main dataGrid
+            CloneDataGrid(this.table,this.table_copy);
+            int costo_nord = nord_ovest(righe , colonne);
+            // reset main dataGrid
+            CloneDataGrid(this.table_copy,this.table);
+
+            // reset prezzo_tot
+            this.prezzo_tot = 0;
+
+            Thread.Sleep(1000);
+            int costo_min = minimi_costi(righe , colonne);
+
+            MessageBox.Show("hai risparmiato: " + (costo_nord - costo_min));
         }
 
-        private void nord_ovest(int righe, int colonne)
+        private int nord_ovest(int righe, int colonne)
         {
             for (int r = 0; r < righe - 1; r++)
             {
@@ -206,7 +239,6 @@ namespace logistica
                         r--;
                         break;
                     }
-
                     this.text.Refresh();
                     this.table.Refresh();
                     Thread.Sleep(1000);
@@ -214,7 +246,8 @@ namespace logistica
                 this.table.Refresh();
                 Thread.Sleep(1000);
             }
-            MessageBox.Show(this.prezzo_tot + "");
+            MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
+            return prezzo_tot;
         }
 
         private char delete(int riga, int colonna, int valore_cella, int total_produced, int total_requested, int righe)
@@ -242,8 +275,9 @@ namespace logistica
             }
         }
 
-        private void minimi_costi(int righe, int colonne)
+        private int minimi_costi(int righe, int colonne)
         {
+            
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText("MINIMI-COSTI SYSTEM");
             int[] pos = new int[5];
@@ -265,7 +299,8 @@ namespace logistica
                 this.table.Refresh();
                 Thread.Sleep(1000);
             }
-            MessageBox.Show(this.prezzo_tot + "");
+            MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
+            return prezzo_tot;
         }
 
         private int[] find_min_data(int righe, int colonne )
@@ -297,7 +332,5 @@ namespace logistica
             }
             return min_data;
         }
-
-        
     }
 }
