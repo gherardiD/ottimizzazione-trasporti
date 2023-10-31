@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace logistica
 {
@@ -211,7 +212,9 @@ namespace logistica
             Thread.Sleep(1000);
             int costo_min = minimi_costi(righe , colonne);
 
-            MessageBox.Show("hai risparmiato: " + (costo_nord - costo_min));
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText("Hai risparmiato: " + (costo_nord - costo_min));
         }
 
         private int nord_ovest(int righe, int colonne)
@@ -224,17 +227,20 @@ namespace logistica
                     int total_produced = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
                     int total_requested = int.Parse(this.table.Rows[righe - 1].Cells[c].Value.ToString());
 
-                    if(delete(r, c, valore_cella, total_produced, total_requested, righe) == 'c')
+                    String num_pcd = this.table.Rows[r].Cells[0].Value.ToString().Substring(3);
+                    String num_con = this.table.Columns[c].Name.Trim().Substring(6);
+
+                    if (delete(r, c, valore_cella, total_produced, total_requested, righe) == 'c')
                     {
                         this.text.AppendText(Environment.NewLine);
-                        this.text.AppendText(" produttore  " + r + " soddisfa consumatore " + c + " al prezzo di " + total_requested * valore_cella);
+                        this.text.AppendText(" Produttore  " + num_pcd + " soddisfa Consumatore " + num_con + " Prezzo = " + total_requested * valore_cella);
                         colonne -= 1;
                         c--;
                     }
                     else
                     {
                         this.text.AppendText(Environment.NewLine);
-                        this.text.AppendText(" consumatore " + c + " è stato soddisfato da " + r + " al prezzo di " + total_produced * valore_cella);
+                        this.text.AppendText(" Consumatore " + num_con + " è stato soddisfato da Produttore " + num_pcd + " Prezzo = " + total_produced * valore_cella);
                         righe -= 1;
                         r--;
                         break;
@@ -246,7 +252,16 @@ namespace logistica
                 this.table.Refresh();
                 Thread.Sleep(1000);
             }
-            MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
+            this.table.Rows.RemoveAt(0);
+
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot);
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText(Environment.NewLine);
+            this.text.Refresh();
+
+            ///MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
             return prezzo_tot;
         }
 
@@ -287,19 +302,26 @@ namespace logistica
                 if (delete(pos[0], pos[1], pos[2], pos[3], pos[4], righe) == 'c')
                 {
                     this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" produttore  " + pos[0] + " soddisfa consumatore " + pos[1] + " al prezzo di " + pos[2] * pos[4]);
+                    this.text.AppendText(" Produttore  " + pos[0] + " soddisfa Consumatore " + pos[1] + " Prezzo = " + pos[2] * pos[4]);
                     colonne -= 1;
                 }
                 else
                 {
                     this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" produttore  " + pos[1] + " soddisfa consumatore " + pos[0] + " al prezzo di " + pos[2] * pos[4]);
+                    this.text.AppendText(" Produttore  " + pos[1] + " soddisfa Consumatore " + pos[0] + " Prezzo = " + pos[2] * pos[4]);
                     righe -= 1;
                 }
                 this.table.Refresh();
                 Thread.Sleep(1000);
             }
-            MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
+            this.table.Rows.RemoveAt(0);
+
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText(Environment.NewLine);
+            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot);
+            this.text.Refresh();
+
+            ///MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
             return prezzo_tot;
         }
 
