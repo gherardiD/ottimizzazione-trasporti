@@ -152,7 +152,6 @@ namespace logistica
                             this.table.Rows[righe - 1].Cells[colonne - 1].Value = tot;
                         }
                         // minimun and maximum to avoid total produced values = 0
-                        /// MessageBox.Show(tot + "");
                         casual_tot_produced = rnd.Next(1, (tot - (righe - r))/max);
 
                         if(r == righe - 2)
@@ -212,6 +211,7 @@ namespace logistica
             Thread.Sleep(1000);
             int costo_min = minimi_costi(righe , colonne);
 
+            // diff between nord-ovest and minimi-costi systems
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText("Hai risparmiato: " + (costo_nord - costo_min));
@@ -224,6 +224,9 @@ namespace logistica
                 for (int c = 1; c < colonne - 1; c++)
                 {
                     int valore_cella = int.Parse(this.table.Rows[r].Cells[c].Value.ToString());
+                    // colour cell text
+                    this.table.Rows[r].Cells[c].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+
                     int total_produced = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
                     int total_requested = int.Parse(this.table.Rows[righe - 1].Cells[c].Value.ToString());
 
@@ -232,6 +235,7 @@ namespace logistica
 
                     if (delete(r, c, valore_cella, total_produced, total_requested, righe) == 'c')
                     {
+                        // write on textbox what is happening
                         this.text.AppendText(Environment.NewLine);
                         this.text.AppendText(" Produttore  " + num_pcd + " soddisfa Consumatore " + num_con + " Prezzo = " + total_requested * valore_cella);
                         colonne -= 1;
@@ -239,6 +243,7 @@ namespace logistica
                     }
                     else
                     {
+                        // write on textbox what is happening
                         this.text.AppendText(Environment.NewLine);
                         this.text.AppendText(" Consumatore " + num_con + " è stato soddisfato da Produttore " + num_pcd + " Prezzo = " + total_produced * valore_cella);
                         righe -= 1;
@@ -246,11 +251,11 @@ namespace logistica
                         break;
                     }
                     this.text.Refresh();
-                    this.table.Refresh();
                     Thread.Sleep(1000);
+                    this.table.Refresh();
                 }
-                this.table.Refresh();
                 Thread.Sleep(1000);
+                this.table.Refresh();
             }
             this.table.Rows.RemoveAt(0);
 
@@ -261,7 +266,6 @@ namespace logistica
             this.text.AppendText(Environment.NewLine);
             this.text.Refresh();
 
-            ///MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
             return prezzo_tot;
         }
 
@@ -270,6 +274,10 @@ namespace logistica
             // calculates if we have to delete the producer or the consumer
             if (total_produced - total_requested > 0)
             {
+                // colour row and coloumn selected
+                this.table.Columns[colonna].DefaultCellStyle.BackColor = Color.Coral;
+                this.table.Refresh();
+
                 // delete requester
                 this.prezzo_tot += total_requested * valore_cella;
                 total_produced -= total_requested;
@@ -280,6 +288,10 @@ namespace logistica
             }
             else
             {
+                // colour row and coloumn selected
+                this.table.Rows[riga].DefaultCellStyle.BackColor = Color.Coral;
+                this.table.Refresh();
+
                 // delete producer
                 this.prezzo_tot += total_produced * valore_cella;
                 total_requested -= total_produced;
@@ -292,13 +304,16 @@ namespace logistica
 
         private int minimi_costi(int righe, int colonne)
         {
-            
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText("MINIMI-COSTI SYSTEM");
             int[] pos = new int[5];
             while (righe > 1 && colonne >= 3)
             {
                 pos = find_min_data(righe, colonne);
+                // colour cell text
+                this.table.Rows[pos[0]].Cells[pos[1]].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+
+                // riga[0] - colonna[1] - valore[2] - tot-prod[3] - tot-req[4]
                 if (delete(pos[0], pos[1], pos[2], pos[3], pos[4], righe) == 'c')
                 {
                     this.text.AppendText(Environment.NewLine);
@@ -311,8 +326,8 @@ namespace logistica
                     this.text.AppendText(" Produttore  " + pos[1] + " soddisfa Consumatore " + pos[0] + " Prezzo = " + pos[2] * pos[4]);
                     righe -= 1;
                 }
-                this.table.Refresh();
                 Thread.Sleep(1000);
+                this.table.Refresh();
             }
             this.table.Rows.RemoveAt(0);
 
@@ -321,13 +336,12 @@ namespace logistica
             this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot);
             this.text.Refresh();
 
-            ///MessageBox.Show("prezzo totale per trasferire tutta la merce: " + this.prezzo_tot);
             return prezzo_tot;
         }
 
         private int[] find_min_data(int righe, int colonne )
         {
-            // return min data - riga[0] - colonna[1] - valore[2] - tot-prod[3] - tot-req[4]
+            // return minimun value data - riga[0] - colonna[1] - valore[2] - tot-prod[3] - tot-req[4]
             int Max = 1000000;
             int[] min_data = new int[5];
             int valore_cella = 0;
@@ -343,7 +357,6 @@ namespace logistica
                     if ( valore_cella < Max)
                     {
                         Max = valore_cella;
-                        // MessageBox.Show(Max + "");
                         min_data[0] = r;
                         min_data[1] = c;
                         min_data[2] = valore_cella;
