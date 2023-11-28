@@ -45,6 +45,7 @@
             this.text = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.genera_numeri_btn = new System.Windows.Forms.Button();
+            this.rigenera_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.consumatori_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produttori_num)).BeginInit();
             this.panel_table.SuspendLayout();
@@ -124,7 +125,7 @@
             this.genera_btn.Name = "genera_btn";
             this.genera_btn.Size = new System.Drawing.Size(102, 39);
             this.genera_btn.TabIndex = 4;
-            this.genera_btn.Text = "genera";
+            this.genera_btn.Text = "Genera";
             this.genera_btn.UseVisualStyleBackColor = false;
             this.genera_btn.Click += new System.EventHandler(this.genera_btn_Click);
             // 
@@ -157,6 +158,7 @@
             this.table.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Name = "table";
+            this.table.RowHeadersVisible = false;
             this.table.RowHeadersWidth = 70;
             this.table.Size = new System.Drawing.Size(825, 571);
             this.table.TabIndex = 6;
@@ -258,12 +260,29 @@
             this.genera_numeri_btn.UseVisualStyleBackColor = false;
             this.genera_numeri_btn.Click += new System.EventHandler(this.genera_numeri_btn_Click);
             // 
+            // rigenera_btn
+            // 
+            this.rigenera_btn.AutoSize = true;
+            this.rigenera_btn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.rigenera_btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rigenera_btn.Enabled = false;
+            this.rigenera_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rigenera_btn.Location = new System.Drawing.Point(802, 24);
+            this.rigenera_btn.Margin = new System.Windows.Forms.Padding(2);
+            this.rigenera_btn.Name = "rigenera_btn";
+            this.rigenera_btn.Size = new System.Drawing.Size(102, 39);
+            this.rigenera_btn.TabIndex = 12;
+            this.rigenera_btn.Text = "Rigenera";
+            this.rigenera_btn.UseVisualStyleBackColor = false;
+            this.rigenera_btn.Click += new System.EventHandler(this.rigenera_btn_Click);
+            // 
             // logistica_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1466, 829);
+            this.Controls.Add(this.rigenera_btn);
             this.Controls.Add(this.genera_numeri_btn);
             this.Controls.Add(this.panel_text);
             this.Controls.Add(this.start_btn);
@@ -310,6 +329,7 @@
         private System.Windows.Forms.Button genera_numeri_btn;
         private System.Windows.Forms.DataGridView table_copy;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Button rigenera_btn;
     }
 }
 

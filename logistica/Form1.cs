@@ -24,24 +24,32 @@ namespace logistica
           //  table_copy= new DataGridView();
         }
 
-        public bool check()
+        public int check()
         {
-            //return false if it's useless to create the table
+            // return 0 if I have to create a default table
+            // -1 if the user click annull
+            // 1 if I have to create a n X n table
 
             int numero_produttori = (int)produttori_num.Value;
             int numero_consumatori = (int)consumatori_num.Value;
             if(numero_produttori == 1 || numero_consumatori == 1)
             {
-                return false;
+                if (MessageBox.Show("producers or consumers is set to 1. A default 4 X 4 table will be created do you want to continue?", "default Table", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    return 0;
+                else
+                    return -1;
             }
-            return true;
+            return 1;
         }
 
         private void genera_btn_Click(object sender, EventArgs e)
         {
+            int check_result = check();
+            if (check_result == -1)
+                    return;
             //generate the table
             this.table.Visible = true;
-            if (!check())
+            if (check_result == 0)
             {
                 //default table
 
@@ -66,8 +74,7 @@ namespace logistica
                 //user table
                 int numero_produttori = (int)produttori_num.Value;
                 int numero_consumatori = (int)consumatori_num.Value;
-
-
+ 
                 //creation table
                 //this.table = new DataGridView();
                 //this.table.Name= "table";
@@ -105,6 +112,9 @@ namespace logistica
 
         private void genera_numeri_btn_Click(object sender, EventArgs e)
         {
+            // prices max = 100
+            // tot max per line = 300
+
             int colonne = this.table.Columns.Count;
             int righe = this.table.Rows.Count;
             Random rnd = new Random();
@@ -191,6 +201,7 @@ namespace logistica
             return;
         }
 
+
         private void start_btn_Click(object sender, EventArgs e)
         {
             int colonne = this.table.Columns.Count;
@@ -215,6 +226,9 @@ namespace logistica
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText("Hai risparmiato: " + (costo_nord - costo_min));
+
+            // enable rigenra btn
+            this.rigenera_btn.Enabled= true;
         }
 
         private int nord_ovest(int righe, int colonne)
@@ -317,13 +331,13 @@ namespace logistica
                 if (delete(pos[0], pos[1], pos[2], pos[3], pos[4], righe) == 'c')
                 {
                     this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" Produttore  " + pos[0] + " soddisfa Consumatore " + pos[1] + " Prezzo = " + pos[2] * pos[4]);
+                    this.text.AppendText(" Produttore  " + (pos[0] + 1) + " soddisfa Consumatore " + pos[1] + " Prezzo = " + pos[2] * pos[4]);
                     colonne -= 1;
                 }
                 else
                 {
                     this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" Produttore  " + pos[1] + " soddisfa Consumatore " + pos[0] + " Prezzo = " + pos[2] * pos[4]);
+                    this.text.AppendText(" Produttore  " + (pos[1] + 1) + " soddisfa Consumatore " + pos[0] + " Prezzo = " + pos[2] * pos[4]);
                     righe -= 1;
                 }
                 Thread.Sleep(1000);
@@ -366,6 +380,39 @@ namespace logistica
                 }
             }
             return min_data;
+        }
+
+        private void rigenera_btn_Click(object sender, EventArgs e)
+        {
+            // enable genera btn
+            this.genera_btn.Enabled = true;
+
+            // reset prezzo_tot
+            prezzo_tot = 0;
+
+            // reset table
+
+            DataGridView resetted_table = new DataGridView();
+            // resetted_table.Name= "table";
+            resetted_table.AllowUserToAddRows= false;
+            resetted_table.AllowUserToDeleteRows= false;
+            resetted_table.CausesValidation= false;
+            resetted_table.ColumnHeadersHeightSizeMode=DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resetted_table.Dock = DockStyle.Fill;
+            resetted_table.ColumnHeadersVisible = true;
+            resetted_table.Columns.Add("productor", "Productors");
+            resetted_table.ReadOnly= true;
+            resetted_table.RowHeadersVisible= false;
+
+            CloneDataGrid(resetted_table, this.table);
+            this.table.Name = "table";
+
+            this.table.Refresh();
+
+            // reset textBox
+            this.text.Text = "NORD-OVEST SYSTEM:";
+            this.panel_text.Refresh();
+            this.text.Refresh();
         }
     }
 }
