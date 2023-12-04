@@ -107,6 +107,8 @@ namespace logistica
                 this.table.Rows.Add("tot");
             }
             this.genera_btn.Enabled = false;
+            this.genera_numeri_btn.Enabled = true;
+            this.start_btn.Enabled = true;
         }
 
 
@@ -204,6 +206,10 @@ namespace logistica
 
         private void start_btn_Click(object sender, EventArgs e)
         {
+            // disable btns
+            this.genera_numeri_btn.Enabled = false;
+            this.start_btn.Enabled = false;
+
             int colonne = this.table.Columns.Count;
             int righe = this.table.Rows.Count;
             this.panel_text.Visible= true;
@@ -225,10 +231,11 @@ namespace logistica
             // diff between nord-ovest and minimi-costi systems
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
-            this.text.AppendText("Hai risparmiato: " + (costo_nord - costo_min));
+            this.text.AppendText("Hai risparmiato: " + (costo_nord - costo_min) + "$");
 
-            // enable rigenra btn
+            // enable rigenera btn
             this.rigenera_btn.Enabled= true;
+            
         }
 
         private int nord_ovest(int righe, int colonne)
@@ -239,27 +246,26 @@ namespace logistica
                 {
                     int valore_cella = int.Parse(this.table.Rows[r].Cells[c].Value.ToString());
                     // colour cell text
-                    this.table.Rows[r].Cells[c].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+                    this.table.Rows[r].Cells[c].Style = new DataGridViewCellStyle { ForeColor = Color.YellowGreen };
 
                     int total_produced = int.Parse(this.table.Rows[r].Cells[colonne - 1].Value.ToString());
                     int total_requested = int.Parse(this.table.Rows[righe - 1].Cells[c].Value.ToString());
 
+                    // numero produttore e consumatore
                     String num_pcd = this.table.Rows[r].Cells[0].Value.ToString().Substring(3);
                     String num_con = this.table.Columns[c].Name.Trim().Substring(6);
 
+                    // write on textbox what is happening
+                    this.text.AppendText(Environment.NewLine);
+                    this.text.AppendText(" Da produttore  nr: " + num_pcd + " a Consumatore nr: " + num_con + ". Prezzo = " + total_requested * valore_cella + "$");
+
                     if (delete(r, c, valore_cella, total_produced, total_requested, righe) == 'c')
                     {
-                        // write on textbox what is happening
-                        this.text.AppendText(Environment.NewLine);
-                        this.text.AppendText(" Produttore  " + num_pcd + " soddisfa Consumatore " + num_con + " Prezzo = " + total_requested * valore_cella);
                         colonne -= 1;
                         c--;
                     }
                     else
                     {
-                        // write on textbox what is happening
-                        this.text.AppendText(Environment.NewLine);
-                        this.text.AppendText(" Consumatore " + num_con + " è stato soddisfato da Produttore " + num_pcd + " Prezzo = " + total_produced * valore_cella);
                         righe -= 1;
                         r--;
                         break;
@@ -275,7 +281,7 @@ namespace logistica
 
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
-            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot);
+            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot + "€");
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
             this.text.Refresh();
@@ -326,18 +332,22 @@ namespace logistica
                 pos = find_min_data(righe, colonne);
                 // colour cell text
                 this.table.Rows[pos[0]].Cells[pos[1]].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+                
+                // posizione prosuttore e consumatore
+                String num_pcd = this.table.Rows[pos[0]].Cells[0].Value.ToString().Substring(3);
+                String num_con = this.table.Columns[pos[1]].Name.Trim().Substring(6);
+
+                // write on textbox what is happening
+                this.text.AppendText(Environment.NewLine);
+                this.text.AppendText(" Da produttore  nr: " + num_pcd + " a Consumatore nr: " + num_con + ". Prezzo = " + pos[2] * pos[4] + "€");
 
                 // riga[0] - colonna[1] - valore[2] - tot-prod[3] - tot-req[4]
                 if (delete(pos[0], pos[1], pos[2], pos[3], pos[4], righe) == 'c')
                 {
-                    this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" Produttore  " + (pos[0] + 1) + " soddisfa Consumatore " + pos[1] + " Prezzo = " + pos[2] * pos[4]);
                     colonne -= 1;
                 }
                 else
                 {
-                    this.text.AppendText(Environment.NewLine);
-                    this.text.AppendText(" Produttore  " + (pos[1] + 1) + " soddisfa Consumatore " + pos[0] + " Prezzo = " + pos[2] * pos[4]);
                     righe -= 1;
                 }
                 Thread.Sleep(1000);
@@ -347,7 +357,7 @@ namespace logistica
 
             this.text.AppendText(Environment.NewLine);
             this.text.AppendText(Environment.NewLine);
-            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot);
+            this.text.AppendText("PREZZO TOTALE: " + this.prezzo_tot + "€");
             this.text.Refresh();
 
             return prezzo_tot;
@@ -386,6 +396,9 @@ namespace logistica
         {
             // enable genera btn
             this.genera_btn.Enabled = true;
+
+            // disable this btn
+            this.rigenera_btn.Enabled = false;
 
             // reset prezzo_tot
             prezzo_tot = 0;
